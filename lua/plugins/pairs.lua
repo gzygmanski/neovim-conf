@@ -12,8 +12,8 @@ M.map_pairs = function ()
   for _, value in ipairs(d_pairs) do
     local opening = string.sub(value, 1, 1)
     local closing = string.sub(value, 2, 2)
-    vim.keymap.set("i", string.rep(opening, 2), value .. "<left>", {noremap = true, silent = true})
-    vim.keymap.set("i", opening .. "<CR>", opening .. "<CR>" .. closing .. "<Esc>ko", {noremap = true, silent = true})
+    vim.keymap.set({"i", "s"}, string.rep(opening, 2), value .. "<left>", {noremap = true, silent = true})
+    vim.keymap.set({"i", "s"}, opening .. "<CR>", opening .. "<CR>" .. closing .. "<Esc>ko", {noremap = true, silent = true})
   end
 end
 
