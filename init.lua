@@ -3,10 +3,9 @@ vim.g.maplocalleader = ','
 vim.g.barbar_auto_setup = false
 
 -- Emmet
-vim.g.user_emmet_leader_key = '<leader>'
-vim.g.user_emmet_expandabbr_key = '<leader>'
-vim.g.user_emmet_mode = 'in'
-vim.g.user_emmet_install_global = 1
+vim.g.user_emmet_leader_key = ','
+vim.g.user_emmet_mode = 'inv'
+vim.g.user_emmet_install_global = 0
 vim.g.jsx_ext_required = 0
 vim.g.user_emmet_settings = {
   javascriptreact = { extends = 'jsx' },
