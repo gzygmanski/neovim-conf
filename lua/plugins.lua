@@ -31,6 +31,7 @@ require('lazy').setup {
   { 'gzygmanski/nord-vim',     branch = 'develop' },
   'nvim-tree/nvim-tree.lua',
   'romgrk/barbar.nvim',
+  'tpope/vim-surround',
   'sindrets/diffview.nvim',
   {
     'TimUntersberger/neogit',
