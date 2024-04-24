@@ -48,14 +48,20 @@ local augroup =
 
 null_ls.setup {
   -- add your sources / config options here
+  diagnostic_config = {
+    virtual_text = {
+      source = false,
+      prefix = '󰧟',
+      spacing = 1,
+      severity_limit = 'Error',
+    },
+  },
   sources = {
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.prettierd,
-    null_ls.builtins.formatting.autopep8,
-    null_ls.builtins.diagnostics.eslint_d,
-    null_ls.builtins.diagnostics.mypy,
+    null_ls.builtins.formatting.rustywind,
+    null_ls.builtins.diagnostics.proselint,
     null_ls.builtins.code_actions.proselint,
-    null_ls.builtins.completion.spell,
   },
   debug = false,
   on_attach = function(client, bufnr)

@@ -27,7 +27,7 @@ require('lazy').setup {
   -- { "j-hui/fidget.nvim", opts = {} },
 
   -- Additional lua configuration, makes nvim stuff amazing!
-  'jose-elias-alvarez/null-ls.nvim',
+  "nvimtools/none-ls.nvim",
   { 'gzygmanski/nord-vim',     branch = 'develop' },
   'nvim-tree/nvim-tree.lua',
   'romgrk/barbar.nvim',
@@ -79,4 +79,17 @@ require('lazy').setup {
       )
     end,
   },
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",
+    lazy = true,
+    -- ft = "markdown",
+    -- event = {
+    --   "BufReadPre " .. vim.fn.expand "~" .. "/vaults/noteshiss/**",
+    --   "BufNewFile " .. vim.fn.expand "~" .. "/vaults/noteshiss/**",
+    -- },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+  }
 }

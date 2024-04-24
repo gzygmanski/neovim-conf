@@ -50,7 +50,8 @@ local options = {
   timeoutlen = 300,
   undofile = true,
   updatetime = 250,
-  wrap = false
+  wrap = false,
+  mouse = 'c'
 }
 
 setOptions(options)

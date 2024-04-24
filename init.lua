@@ -25,33 +25,30 @@ require 'plugins/barbar'
 require 'plugins/cmp'
 require 'plugins/diffview'
 require 'plugins/neogit'
+require 'plugins/obsidian'
 require 'options'
 require 'keymaps'
 
 -- Autocommands
-vim.api.nvim_exec(
+vim.api.nvim_exec2(
   [[
   augroup Format
     autocmd!
     autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
   augroup END
-]], true)
+]], { output = true })
 
-vim.api.nvim_exec(
+vim.api.nvim_exec2(
   [[
   autocmd TermOpen * setlocal signcolumn=no nonu nornu wrap linebreak
-  autocmd FileType markdown setlocal spell spelllang=pl,en tw=80 wrap linebreak
+  autocmd FileType markdown setlocal spell spelllang=pl,en tw=80 linebreak conceallevel=0
   autocmd FileType html,css,javascript,javascriptreact,typescriptreact EmmetInstall
-]],
-  true
-)
+]], { output = true })
 
-vim.api.nvim_exec(
+vim.api.nvim_exec2(
   [[
   augroup CommandLineWindow
     autocmd CmdwinEnter * setlocal signcolumn=no nonu nornu
     autocmd CmdwinEnter * startinsert
     autocmd CmdwinEnter * nmap <buffer> <Esc> <CMD>xit<CR>
-]],
-  true
-)
+]], { output = true })

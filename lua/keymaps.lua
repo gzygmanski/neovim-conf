@@ -438,6 +438,13 @@ vim.keymap.set(
   '<CMD>lua vim.lsp.buf.rename()<CR>',
   { noremap = true, silent = true }
 )
+vim.keymap.set(
+  'n',
+  '<leader>ca',
+  '<CMD>lua vim.lsp.buf.code_action()<CR>',
+  { noremap = true, silent = true }
+)
+
 
 -- Git
 vim.keymap.set(
@@ -462,5 +469,13 @@ vim.keymap.set(
   'n',
   'dq',
   '<CMD>DiffviewClose<CR>',
+  { noremap = true, silent = true }
+)
+
+-- Obsidian
+vim.keymap.set(
+  'n',
+  '<leader>on',
+  '<CMD>ObsidianNew<CR>',
   { noremap = true, silent = true }
 )

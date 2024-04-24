@@ -28,18 +28,18 @@ mason_lspconfig.setup {
 }
 
 -- LSP settings.
---  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(
-    bufnr,
-    'Format',
-    function(_)
-      vim.lsp.buf.format()
-    end,
-    { desc = 'Format current buffer with LSP' }
-  )
-end
+-- This function gets run when an LSP connects to a particular buffer.
+-- local on_attach = function(_, bufnr)
+--   -- Create a command `:Format` local to the LSP buffer
+--   vim.api.nvim_buf_create_user_command(
+--     bufnr,
+--     'Format',
+--     function(_)
+--       vim.lsp.buf.format()
+--     end,
+--     { desc = 'Format current buffer with LSP' }
+--   )
+-- end
 
 mason_lspconfig.setup_handlers {
   function(server_name)
@@ -53,21 +53,22 @@ mason_lspconfig.setup_handlers {
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] =
     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-      signs = { severity_limit = 'Hint' },
+      signs = { severity_limit = 'Info' },
       virtual_text = {
+        source = false,
+        prefix = '󰧟',
         spacing = 1,
-        prefix = '',
-        severity_limit = 'Warning',
+        severity_limit = 'Info',
       },
       underline = false,
       update_in_insert = false,
     })
 
 local signs = {
-  Error = '',
-  Warn = '',
-  Hint = '',
-  Info = '',
+  Error = '󰧟 ',
+  Warn = '󰧟 ',
+  Hint = '󰧟 ',
+  Info = '󰧟 ',
 }
 
 for type, icon in pairs(signs) do
