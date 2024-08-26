@@ -29,14 +29,11 @@ require('lazy').setup {
   -- Additional lua configuration, makes nvim stuff amazing!
   "nvimtools/none-ls.nvim",
   { 'gzygmanski/nord-vim',     branch = 'develop' },
+  -- 'elihunter173/dirbuf.nvim',
   'nvim-tree/nvim-tree.lua',
   'romgrk/barbar.nvim',
   'tpope/vim-surround',
   'sindrets/diffview.nvim',
-  {
-    'TimUntersberger/neogit',
-    dependecies = { 'nvim-lua/plenary.nvim' },
-  },
   { 'glepnir/galaxyline.nvim', branch = 'main' },
   { 'numToStr/Comment.nvim',   opts = {} },
   {

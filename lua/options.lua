@@ -51,7 +51,7 @@ local options = {
   undofile = true,
   updatetime = 250,
   wrap = false,
-  mouse = 'c'
+  mouse = 'c',
 }
 
 setOptions(options)

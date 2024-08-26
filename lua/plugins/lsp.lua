@@ -56,7 +56,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] =
       signs = { severity_limit = 'Info' },
       virtual_text = {
         source = false,
-        prefix = '󰧟',
+        prefix = '',
         spacing = 1,
         severity_limit = 'Info',
       },
@@ -65,10 +65,10 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] =
     })
 
 local signs = {
-  Error = '󰧟 ',
-  Warn = '󰧟 ',
-  Hint = '󰧟 ',
-  Info = '󰧟 ',
+  Error = '',
+  Warn = '',
+  Hint = '',
+  Info = '',
 }
 
 for type, icon in pairs(signs) do

@@ -5,25 +5,24 @@ local condition = require('galaxyline.condition')
 local vcs = require('galaxyline.provider_vcs')
 local buffer = require('galaxyline.provider_buffer')
 local fileinfo = require('galaxyline.provider_fileinfo')
-local lspclient = require('galaxyline.provider_lsp')
 local icons = require('galaxyline.provider_fileinfo').define_file_icon()
 
 -- get current file name
 local function file_readonly()
   if vim.bo.filetype == 'help' then return '' end
-  if vim.bo.readonly == true then return "  " end
+  if vim.bo.readonly == true then return " LCK " end
   return ''
 end
 
-function get_current_file_name()
+local function get_current_file_name()
   local file = vim.fn.expand('%:t')
   if vim.fn.empty(file) == 1 then return '' end
   if string.len(file_readonly()) ~= 0 then return file .. file_readonly() end
-  if vim.bo.modifiable then if vim.bo.modified then return '樂' .. file end end
+  if vim.bo.modifiable then if vim.bo.modified then return 'MOD ' .. file end end
   return file .. ' '
 end
 
-function get_cursor_pos()
+local function get_cursor_pos()
   local r, c = unpack(vim.api.nvim_win_get_cursor(0))
   return string.format('%s : %s', r, c)
 end
@@ -51,7 +50,7 @@ local colors = {
   nord16 = '#b48ead'  -- purple
 }
 
-icons['man'] = { colors.green, '' }
+icons['man'] = { colors.green, '?' }
 
 function condition.checkwidth()
   local squeeze_width = vim.fn.winwidth(0) / 2
@@ -64,21 +63,21 @@ gls.left = {
     Mode = {
       provider = function()
         local alias = {
-          n = 'NORMAL',
-          i = 'INSERT',
-          c = 'COMMAND',
-          V = 'VISUAL',
-              [''] = 'VISUAL',
-          t = 'TERMINAL',
-          R = 'REPLACE'
+          n = 'NRM',
+          i = 'INS',
+          c = 'CMD',
+          v = 'VIS',
+          [''] = 'VIS',
+          t = 'TRM',
+          R = 'RPL'
         }
         if not condition.checkwidth() then
           alias = {
             n = 'N',
             i = 'I',
             c = 'C',
-            V = 'V',
-                [''] = 'V',
+            v = 'V',
+            [''] = 'V',
             t = 'T',
             R = 'R'
           }
@@ -96,10 +95,10 @@ gls.left = {
   FileName = {
     provider = function()
       if #get_current_file_name() > 25 then
-        return string.format('    %s…  ',
+        return string.format('  FL %s…   ',
           string.sub(get_current_file_name(), 1, 25))
       end
-      return string.format('    %s  ', get_current_file_name())
+      return string.format('  FL %s   ', get_current_file_name())
     end,
     condition = condition.buffer_not_empty,
     highlight = { colors.nord6, colors.nord3 }
@@ -109,15 +108,15 @@ gls.left = {
     provider = function()
       if buffer.get_buffer_filetype() == '' then return end
       if vim.bo.filetype ~= 'help' then
-        if not condition.checkwidth() then return '      ' end
+        if not condition.checkwidth() then return '  GIT ' end
         local git_branch = ''
         local status, retval = pcall(vcs.get_git_branch)
         if status then git_branch = retval end
         if #git_branch > 25 then
           return
-              string.format('    %s…  ', string.sub(git_branch, 1, 25))
+              string.format('  BRN %s… ', string.sub(git_branch, 1, 25))
         else
-          return string.format('    %s  ', git_branch)
+          return string.format('  BRN %s ', git_branch)
         end
       end
     end,
@@ -142,7 +141,7 @@ gls.right = {
           local numOfErrors = table.getn(
             vim.diagnostic.get(0, { severity = "error" }))
           if numOfErrors > 0 then
-            return string.format('   E%s  ', numOfErrors)
+            return string.format('  E %s ', numOfErrors)
           end
         end
       end,
@@ -151,7 +150,7 @@ gls.right = {
   }, {
   LineInfo = {
     provider = function()
-      return string.format('   ﱓ  %s  ', get_cursor_pos())
+      return string.format('  LN/CN %s ', get_cursor_pos())
     end,
     highlight = { colors.nord6, colors.nord3 }
   }
@@ -159,15 +158,15 @@ gls.right = {
   FileType = {
     provider = function()
       if buffer.get_buffer_filetype() == '' then
-        return '     NONE  '
+        return '  </> NONE '
       end
-      return string.format('     %s  ', buffer.get_buffer_filetype())
+      return string.format('  </> %s ', buffer.get_buffer_filetype())
     end,
     highlight = { colors.nord6, colors.nord2 }
   }
 }, {
   Blank = {
-    provider = function() return '  ' end,
+    provider = function() return ' ' end,
     highlight = { colors.nord6, colors.nord3 }
   }
 }
@@ -180,15 +179,15 @@ gls.short_line_left = {
       provider = function()
         if vim.fn.index(gl.short_line_list, vim.bo.filetype) ~= -1 then
           local filetype = vim.bo.filetype
-          if filetype == 'NvimTree' then return '     Explorer  ' end
+          if filetype == 'NvimTree' then return '  EXPL ' end
           if filetype == 'DiffviewFiles' then
-            return '     Diffview  '
+            return '  DIFF '
           end
         else
           if fileinfo.get_current_file_name() ~= '' then
-            return string.format('    %s  ', get_current_file_name())
+            return string.format('  FIL %s ', get_current_file_name())
           else
-            return '   ﬘  buffer  '
+            return '  BUF '
           end
         end
       end,

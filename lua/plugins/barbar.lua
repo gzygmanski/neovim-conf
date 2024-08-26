@@ -16,7 +16,7 @@ require 'barbar'.setup {
       },
     },
     modified = {
-      button = '樂'
+      button = 'MOD'
     },
     button = false
   },

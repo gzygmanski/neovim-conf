@@ -382,6 +382,12 @@ vim.keymap.set(
   "<CMD>lua require'telescope.builtin'.current_buffer_fuzzy_find(require'plugins/telescope'.get_ivy_mod({}))<CR>",
   { noremap = true, silent = true }
 )
+vim.keymap.set(
+  'n',
+  '<C-b>',
+  "<CMD>lua require'telescope.builtin'.buffers(require'plugins/telescope'.get_ivy_mod({}))<CR>",
+  { noremap = true, silent = true }
+)
 
 -- LSP
 vim.keymap.set(
@@ -450,13 +456,13 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   'gs',
-  '<CMD>Neogit kind=split<CR>',
+  '<CMD>DiffviewOpen<CR>',
   { noremap = true, silent = true }
 )
 vim.keymap.set(
   'n',
   'do',
-  ':DiffviewOpen<CR>',
+  '<CMD>DiffviewFileHistory %<CR>',
   { noremap = true, silent = false }
 )
 vim.keymap.set(
@@ -478,4 +484,18 @@ vim.keymap.set(
   '<leader>on',
   '<CMD>ObsidianNew<CR>',
   { noremap = true, silent = true }
+)
+
+-- Snippets
+vim.keymap.set(
+  { "i", "s" },
+  '<leader>gn',
+  '<CMD>lua require("luasnip").jump(1)<CR>',
+  { silent = true }
+)
+vim.keymap.set(
+  { "i", "s" },
+  '<leader>gp',
+  '<CMD>lua require("luasnip").jump(-1)<CR>',
+  { silent = true }
 )

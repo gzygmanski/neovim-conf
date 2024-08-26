@@ -24,15 +24,19 @@ require 'plugins/galaxyline'
 require 'plugins/barbar'
 require 'plugins/cmp'
 require 'plugins/diffview'
-require 'plugins/neogit'
 require 'plugins/obsidian'
 require 'options'
 require 'keymaps'
+require 'luasnip.loaders.from_vscode'.load({
+  paths = {
+    "./snippets"
+  },
+})
 
 -- Autocommands
 vim.api.nvim_exec2(
   [[
-  augroup Format
+  augroup FormatOptions
     autocmd!
     autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
   augroup END
@@ -52,3 +56,9 @@ vim.api.nvim_exec2(
     autocmd CmdwinEnter * startinsert
     autocmd CmdwinEnter * nmap <buffer> <Esc> <CMD>xit<CR>
 ]], { output = true })
+
+-- vim.api.nvim_exec2(
+--   [[
+--   augroup Neogit
+--     autocmd CmdwinEnter NeogitStatus,NeogitPopup setlocal foldlevel=1000
+-- ]], { output = true })

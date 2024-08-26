@@ -1,0 +1,6 @@
+{
+  "My custom react functional component": {
+    "prefix": "rfc",
+    "body": "import type { ComponentProps } from 'react';\n\nexport type ${1:${TM_FILENAME_BASE}}Props = ComponentProps<'div'>;\n\nconst ${1:${TM_FILENAME_BASE}} = (${2:props}: ${1:${TM_FILENAME_BASE}}Props) => {\n\treturn (\n\t\t<div {...props}>${3:${TM_FILENAME_BASE} Component}</div>\n\t);\n}\n\nexport default ${1:${TM_FILENAME_BASE}};"
+  }
+}

@@ -43,7 +43,7 @@ require('nvim-tree').setup {
   on_attach = on_attach,
   hijack_cursor = false,
   update_cwd = true,
-  update_focused_file = { enable = true, update_cwd = true, ignore_list = {} },
+  update_focused_file = { enable = true, update_cwd = false, ignore_list = {} },
   view = {
     signcolumn = "no",
     width = 50,
@@ -63,18 +63,18 @@ require('nvim-tree').setup {
     special_files = {},
     icons = {
       show = { git = false, folder = true, file = true, folder_arrow = false },
-      padding = ' ',
+      padding = '',
       git_placement = 'after',
       glyphs = {
-        default = '   ',
-        symlink = '   ',
+        default = ' F ',
+        symlink = ' S ',
         folder = {
-          default = "  󰧚 ",
-          open = "  󰧖 ",
-          empty = "  󰧛 ",
-          empty_open = "  󰧗 ",
-          symlink = "   ",
-          symlink_open = "   "
+          default = " D ",
+          open = " ¬ ",
+          empty = " E ",
+          empty_open = " ¬ ",
+          symlink = " S ",
+          symlink_open = " ¬ "
         },
         git = {
           unstaged = "-",
@@ -89,7 +89,7 @@ require('nvim-tree').setup {
     }
   },
   filters = { dotfiles = false },
-  git = { enable = true, ignore = true },
+  git = { enable = true, ignore = false },
   actions = {
     open_file = { resize_window = false },
     remove_file = { close_window = false }

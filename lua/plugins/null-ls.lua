@@ -30,6 +30,7 @@ local async_formatting = function(bufnr)
       if res then
         local client =
             vim.lsp.get_client_by_id(ctx.client_id)
+        if client ~= nil and client.name == 'null-ls' then return end;
         vim.lsp.util.apply_text_edits(
           res,
           bufnr,
@@ -59,9 +60,6 @@ null_ls.setup {
   sources = {
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.prettierd,
-    null_ls.builtins.formatting.rustywind,
-    null_ls.builtins.diagnostics.proselint,
-    null_ls.builtins.code_actions.proselint,
   },
   debug = false,
   on_attach = function(client, bufnr)
